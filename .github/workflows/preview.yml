@@ -54,6 +54,8 @@ jobs:
           retention-days: 1
           path: |
             public/
+            .firebaserc
+            firebase.json
               
   # Deploy on preview / staging channel
   deploy:
