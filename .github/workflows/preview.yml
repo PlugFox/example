@@ -21,7 +21,7 @@ on:
 jobs:
   # Build
   build:
-    if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
+    #if: '${{ github.event.pull_request.head.repo.full_name == github.repository }}'
     name: 'Build preview'
     timeout-minutes: 15
     runs-on: ubuntu-latest
