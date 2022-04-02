@@ -10,7 +10,9 @@ import 'package:url_launcher/url_launcher.dart' as launcher;
 class AboutScreen extends StatelessWidget {
   const AboutScreen({Key? key}) : super(key: key);
 
-  void pop(BuildContext context) => AppRouter.canPop(context) ? AppRouter.maybePop(context) : AppRouter.goHome(context);
+  void pop(BuildContext context) => AppRouter.canPop(context)
+      ? AppRouter.maybePop(context)
+      : AppRouter.goHome(context);
 
   void launch(String url) {
     try {
@@ -42,7 +44,8 @@ class AboutScreen extends StatelessWidget {
                 shrinkWrap: true,
                 physics: const BouncingScrollPhysics(),
                 padding: EdgeInsets.symmetric(
-                  horizontal: math.max((MediaQuery.of(context).size.width - 550) / 2, 8),
+                  horizontal: math.max(
+                      (MediaQuery.of(context).size.width - 550) / 2, 8),
                   vertical: 24,
                 ),
                 children: <Widget>[
@@ -52,15 +55,18 @@ class AboutScreen extends StatelessWidget {
                   ),
                   const Divider(height: 24),
                   TextButton(
-                    onPressed: () => launch('https://example.plugfox.dev/router#home/about'),
+                    onPressed: () =>
+                        launch('https://example.plugfox.dev/router#home/about'),
                     child: const Text('example.plugfox.dev/router'),
                   ),
                   TextButton(
-                    onPressed: () => launch('https://github.com/PlugFox/router'),
-                    child: const Text('github.com/plugfox/router'),
+                    onPressed: () => launch(
+                        'https://github.com/PlugFox/example/tree/master/router'),
+                    child: const Text('github.com/plugfox/example'),
                   ),
                   TextButton(
-                    onPressed: () => launch('https://api.flutter.dev/flutter/widgets/Router-class.html'),
+                    onPressed: () => launch(
+                        'https://api.flutter.dev/flutter/widgets/Router-class.html'),
                     child: const Text('api.flutter.dev'),
                   ),
                   const Divider(height: 24),
