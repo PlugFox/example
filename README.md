@@ -1,2 +1,1 @@
-# example
-https://example.plugfox.dev
+# [example.plugfox.dev](https://example.plugfox.dev)

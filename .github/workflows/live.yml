@@ -1,0 +1,81 @@
+name: DEPLOY LIVE CHANNEL
+
+on:
+# Только ручной деплой в продакшен по кнопке:
+  workflow_dispatch:
+#  push:
+#    branches:
+#      - 'master'
+#  pull_request:
+#    branches:
+#      - 'master'
+
+jobs:
+  # Build
+  build:
+    name: 'Build live'
+    timeout-minutes: 15
+    runs-on: ubuntu-latest
+    container:
+      #image: plugfox/flutter:stable-web
+      image: plugfox/flutter:2.10.3-web
+      options: --user root
+    env:
+      working-directory: ./
+    steps:
+      - name: 🚂 Get latest code
+        uses: actions/checkout@v2
+
+      - name: 🚃 Cache pub modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-pub-modules
+        with:
+          path: |
+            $PWD/.pub_cache/
+          key: ${{ runner.os }}-dart
+
+      - name: 🗄️ Export pub cache directory
+        run: export PUB_CACHE=$PWD/.pub_cache/
+
+      - name: 🌐 Build
+        working-directory: ${{ env.working-directory }}
+        run: make build
+  
+      - name: 📁 Upload web build result
+        uses: actions/upload-artifact@v2
+        with:
+          name: web-live
+          retention-days: 1
+          path: |
+            public/
+
+  # Deploy on live / production channel
+  deploy:
+    name: 'Deploy live'
+    timeout-minutes: 5
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      working-directory: ./public
+    steps:
+      - name: 📦 Download result for web build job
+        uses: actions/download-artifact@v2
+        with:
+          name: web-live
+          path: public
+
+      - name: 📥 Extract web artifact
+        working-directory: ${{ env.working-directory }}
+        run: |
+          ls -al
+      
+      - name: 🔥 Deploy to Firebase live channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EXAMPLE_PLUGFOX_DEV }}'
+          channelId: live
+          projectId: example-plugfox-dev
+          target: example-plugfox-dev
+          entryPoint: ${{ env.working-directory }}

@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Routing">
+  <meta name="keywords" content="dart, flutter, jobs, дарт, флаттер, fox, plague, plugfox, pwa, progressive, web, app, cross-platform, router">
+  <meta name="author" content="@plugfox">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="$FLUTTER_BASE_HREF/icons/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="$FLUTTER_BASE_HREF/icons/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="$FLUTTER_BASE_HREF/icons/favicon-16x16.png">
+  <link rel="manifest" href="$FLUTTER_BASE_HREF/icons/site.webmanifest">
+  <link rel="mask-icon" href="$FLUTTER_BASE_HREF/icons/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="$FLUTTER_BASE_HREF/icons/favicon.ico">
+  <meta name="msapplication-TileColor" content="#37474f">
+  <meta name="msapplication-config" content="$FLUTTER_BASE_HREF/icons/browserconfig.xml">
+  <meta name="theme-color" content="#37474f">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+  <title>Routing</title>
+
+  <!-- STYLE -->
+  <style>
+    html, body {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background-color: #FFF;
+      overflow: hidden;
+      inset: 0px;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      touch-action: none;
+      font: 14px sans-serif;
+      color: black;
+      display: block;
+    }
+    .noscript-center {
+      position: absolute;
+      text-align: center;
+      margin: 0;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 3vw;
+    }
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      -ms-transform: translate(-50%, -50%);
+      transform: translate(-50%, -50%);
+    }
+    .loader {
+      border: 16px solid #f3f3f3;
+      border-radius: 50%;
+      border-top: 16px solid blue;
+      border-right: 16px solid green;
+      border-bottom: 16px solid red;
+      border-left: 16px solid pink;
+      width: 75px;
+      height: 75px;
+      animation: spin 2s linear infinite;
+      -webkit-animation: spin 2s linear infinite;
+    }
+    @-webkit-keyframes spin {
+      0% {
+        -webkit-transform: rotate(0deg);
+      }
+      100% {
+        -webkit-transform: rotate(360deg);
+      }
+    }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+
+  <!-- Использую по старинке, запуская flutter не из сервайс вокера: -->
+  <script defer src="main.dart.js" type="application/javascript"></script>
+</head>
+<body>
+  <!-- NOSCRIPT -->
+  <noscript class='noscript-center'>Your browser does not support JavaScript!</noscript>
+
+  <div class="loading">
+    <div class="loader"></div>
+  </div>
+
+  <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers
+  <script>
+    var serviceWorkerVersion = null;
+    var scriptLoaded = false;
+    function loadMainDartJs() {
+      if (scriptLoaded) {
+        return;
+      }
+      scriptLoaded = true;
+      var scriptTag = document.createElement('script');
+      scriptTag.src = 'main.dart.js';
+      scriptTag.type = 'application/javascript';
+      document.body.append(scriptTag);
+    }
+
+    if ('serviceWorker' in navigator) {
+      // Service workers are supported. Use them.
+      window.addEventListener('load', function () {
+        // Wait for registration to finish before dropping the <script> tag.
+        // Otherwise, the browser will load the script multiple times,
+        // potentially different versions.
+        var serviceWorkerUrl = 'flutter_service_worker.js?v=' + serviceWorkerVersion;
+        navigator.serviceWorker.register(serviceWorkerUrl)
+          .then((reg) => {
+            function waitForActivation(serviceWorker) {
+              serviceWorker.addEventListener('statechange', () => {
+                if (serviceWorker.state == 'activated') {
+                  console.log('Installed new service worker.');
+                  loadMainDartJs();
+                }
+              });
+            }
+            if (!reg.active && (reg.installing || reg.waiting)) {
+              // No active web worker and we have installed or are installing
+              // one for the first time. Simply wait for it to activate.
+              waitForActivation(reg.installing || reg.waiting);
+            } else if (!reg.active.scriptURL.endsWith(serviceWorkerVersion)) {
+              // When the app updates the serviceWorkerVersion changes, so we
+              // need to ask the service worker to update.
+              console.log('New service worker available.');
+              reg.update();
+              waitForActivation(reg.installing);
+            } else {
+              // Existing service worker is still good.
+              console.log('Loading app from service worker.');
+              loadMainDartJs();
+            }
+          });
+
+        // If service worker doesn't succeed in a reasonable amount of time,
+        // fallback to plaint <script> tag.
+        setTimeout(() => {
+          if (!scriptLoaded) {
+            console.warn(
+              'Failed to load app from service worker. Falling back to plain <script> tag.',
+            );
+            loadMainDartJs();
+          }
+        }, 4000);
+      });
+    } else {
+      // Service workers not supported. Just drop the <script> tag.
+      loadMainDartJs();
+    }
+  </script>
+   -->
+
+  <!-- ON LOADED -->
+  <script>
+    //<!--
+    document.addEventListener('DOMContentLoaded', function() {
+      try {
+        console.log('DOM content loaded');
+      } catch (e) {
+        console.error(e);
+      }
+    });
+    //-->
+  </script>
+</body>
+</html>
