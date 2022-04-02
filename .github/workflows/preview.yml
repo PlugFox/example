@@ -75,13 +75,13 @@ jobs:
         run: |
           ls -al
       
-      #- name: 🔥 Deploy to Firebase preview channel
-      #  uses: FirebaseExtended/action-hosting-deploy@v0
-      #  with:
-      #    entryPoint: ${{ env.working-directory }}
-      #    repoToken: '${{ secrets.GITHUB_TOKEN }}'
-      #    firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EXAMPLE_PLUGFOX_DEV }}'
-      #    expires: 7d
-      #    channelId: stg
-      #    projectId: example-plugfox-dev
-      #    target: example-plugfox-dev
+      - name: 🔥 Deploy to Firebase preview channel
+        uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          entryPoint: ${{ env.working-directory }}
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_EXAMPLE_PLUGFOX_DEV }}'
+          expires: 7d
+          channelId: stg
+          projectId: example-plugfox-dev
+          target: example-plugfox-dev
